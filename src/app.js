@@ -1,12 +1,12 @@
 'use strict';
 
 import { quizData } from './data.js';
-import { router } from './router.js';
+import { initQuestionPage } from './pages/questionPage.js';
 
 const loadApp = () => {
   quizData.currentQuestionIndex = 0;
 
-  router('question');
+  initQuestionPage();
 };
 
 window.addEventListener('load', loadApp);
