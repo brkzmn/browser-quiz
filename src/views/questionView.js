@@ -9,7 +9,6 @@ import { NEXT_QUESTION_BUTTON_ID } from '../constants.js';
  */
 export const getQuestionElement = (question) => {
   const element = document.createElement('div');
-
   // I use String.raw just to get fancy colors for the HTML in VS Code.
   element.innerHTML = String.raw`
     <h1>${question}</h1>

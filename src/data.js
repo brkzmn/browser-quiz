@@ -22,6 +22,7 @@ export const quizData = {
         b: 'var, const, let, function',
         c: 'var, let, const',
       },
+      prize : '$100',
       correct: 'c',
       selected: null,
       links: [
@@ -43,6 +44,7 @@ export const quizData = {
         c: 'determines if a value is primitive',
         d: 'can tell the difference between arrays and objects',
       },
+      prize : '$200',
       correct: 'b',
       selected: null,
       links: [
@@ -54,6 +56,27 @@ export const quizData = {
           text: 'MDN',
           href:
             'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof',
+        },
+      ],
+    },
+    {
+      text: '11What are the different ways to declare a JS variable?',
+      answers: {
+        a: 'constant, let, variable',
+        b: 'var, const, let, function',
+        c: 'var, let, const',
+      },
+      prize : '$100',
+      correct: 'c',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/variables',
+        },
+        {
+          text: 'Tyler McGinnis',
+          href: 'https://ui.dev/var-let-const/',
         },
       ],
     },
