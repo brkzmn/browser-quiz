@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@400;700&family=Nunito:wght@300;400;700&family=Poppins:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
 .centered {
   position: fixed;
   top: 50%;
@@ -14,4 +25,31 @@
 
 ul {
   list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  row-gap: 1rem;
+}
+
+.answer-list-item input[type='radio'] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.answer-list-item label {
+  display: inline-block;
+  background-color: #010508;
+  color: white;
+  padding: 12px 24px;
+  clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+  width: 21rem;
+  box-shadow: inset 0 0 26px 8px #084866;
+}
+
+.answer-list-item input[type='radio']:checked + label {
+  background-color: #e4a940;
+}
+
+.answer-list-item label:hover {
+  background-color: #e4a940;
 }
