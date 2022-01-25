@@ -67,3 +67,7 @@ ul {
 .disabled{
   background-color: lightslategrey;
 }
+
+.pointer-none {
+  pointer-events: none;
+}

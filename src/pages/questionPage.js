@@ -1,7 +1,6 @@
 'use strict';
 
 import { ANSWERS_LIST_ID, USER_INTERFACE_ID } from '../constants.js';
-import { NEXT_QUESTION_BUTTON_ID } from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
@@ -24,16 +23,47 @@ export const initQuestionPage = () => {
   const process = initProcess();
   userInterface.appendChild(process);
 
-  document
-    .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener('click', nextQuestion);
+  const inputs = document.getElementsByTagName('label');
+  Array.from(inputs).forEach(input => {
+    input.addEventListener("click", (e) => {
+      IsAnswerRight(e);
+      nextQuestion(e);
+    });
+  });
+ 
 };
 
-const nextQuestion = () => {
-  quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+const IsAnswerRight = (e) => {
+  const answerList = document.querySelectorAll('.answer-list-item')
+  Array.from(answerList).forEach(answer => {
+    answer.classList.add('pointer-none')
+  })
+  
+  setTimeout(() => {
+    const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+    const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
+    rightAnswer.style.backgroundColor = 'green';
+    if(e.target.previousElementSibling.id !== currentQuestion.correct){
+      e.target.style.backgroundColor = 'red'
+    }
+  }, 2000);
+}
 
-  const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
-  userInterfaceElement.innerHTML = '';
-
-  initQuestionPage();
+const nextQuestion = (e) => {
+  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  
+  if(e.target.previousElementSibling.id === currentQuestion.correct){
+    setTimeout(() => {
+      quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+      const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
+      userInterfaceElement.innerHTML = '';
+      initQuestionPage();
+    }, 5000);
+  }else {
+    setTimeout(() => {
+      const lostScreen = document.getElementById('user-interface')
+      lostScreen.innerHTML = `LOST`
+    }, 5000);
+  }
+  
 };

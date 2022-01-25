@@ -14,3 +14,4 @@ export const createAnswerElement = (key, answerText) => {
 
   return element;
 };
+
