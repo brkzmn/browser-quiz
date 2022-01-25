@@ -16,3 +16,5 @@ export const initWelcomePage = () => {
     });
 
 }
+
+//Welcome Page builder function
