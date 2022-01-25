@@ -24,18 +24,18 @@ export const initQuestionPage = () => {
   const process = initProcess();
   userInterface.appendChild(process);
 
-  document
-    .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener('click', nextQuestion);
 
   const inputs = document.getElementsByTagName('label');
   Array.from(inputs).forEach(input => {
-    input.addEventListener("click", rightAnswer);
+    input.addEventListener("click", (e) => {
+      IsAnswerRight(e);
+      nextQuestion(e);
+    });
   });
  
 };
 
-const rightAnswer = (e) => {
+const IsAnswerRight = (e) => {
   const answerList = document.querySelectorAll('.answer-list-item')
   Array.from(answerList).forEach(answer => {
     answer.classList.add('pointer-none')
@@ -45,17 +45,27 @@ const rightAnswer = (e) => {
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
     const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
     rightAnswer.style.backgroundColor = 'green';
+    if(e.target.previousElementSibling.id !== currentQuestion.correct){
+      e.target.style.backgroundColor = 'red'
+    }
   }, 2000);
 }
 
-
-
-
-const nextQuestion = () => {
-  quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-
-  const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
-  userInterfaceElement.innerHTML = '';
-
-  initQuestionPage();
+const nextQuestion = (e) => {
+  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  
+  if(e.target.previousElementSibling.id === currentQuestion.correct){
+    setTimeout(() => {
+      quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+      const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
+      userInterfaceElement.innerHTML = '';
+      initQuestionPage();
+    }, 5000);
+  }else {
+    setTimeout(() => {
+      const lostScreen = document.getElementById('user-interface')
+      lostScreen.innerHTML = `LOST`
+    }, 5000);
+  }
+  
 };
