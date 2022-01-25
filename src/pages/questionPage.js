@@ -47,8 +47,7 @@ const rightAnswer = (e) => {
     const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
     rightAnswer.style.backgroundColor = 'green';
   }, 2000);
-   
-  
+    
 }
 
 
