@@ -36,7 +36,6 @@ export const initQuestionPage = () => {
 };
 
 const rightAnswer = (e) => {
-
   const answerList = document.querySelectorAll('.answer-list-item')
   Array.from(answerList).forEach(answer => {
     answer.classList.add('pointer-none')
@@ -47,7 +46,6 @@ const rightAnswer = (e) => {
     const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
     rightAnswer.style.backgroundColor = 'green';
   }, 2000);
-    
 }
 
 
