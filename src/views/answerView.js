@@ -6,8 +6,11 @@
  */
 export const createAnswerElement = (key, answerText) => {
   const element = document.createElement('li');
+  element.classList.add('answer-list-item');
   element.innerHTML = String.raw`
-    ${key}: ${answerText};
+  <input type="radio" id="${key}" name="answer" value="${answerText}">
+  <label for="${key}">${key.toUpperCase()}: ${answerText}</label>
   `;
+
   return element;
 };
