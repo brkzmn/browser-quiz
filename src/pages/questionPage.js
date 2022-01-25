@@ -1,7 +1,6 @@
 'use strict';
 
 import { ANSWERS_LIST_ID, USER_INTERFACE_ID } from '../constants.js';
-import { NEXT_QUESTION_BUTTON_ID } from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
@@ -20,10 +19,8 @@ export const initQuestionPage = () => {
     answersListElement.appendChild(answerElement);
   }
 
-
   const process = initProcess();
   userInterface.appendChild(process);
-
 
   const inputs = document.getElementsByTagName('label');
   Array.from(inputs).forEach(input => {
