@@ -5,6 +5,7 @@ import { NEXT_QUESTION_BUTTON_ID } from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
+import { initProcess } from '../views/processView.js';
 
 export const initQuestionPage = () => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
@@ -14,11 +15,13 @@ export const initQuestionPage = () => {
   userInterface.appendChild(questionElement);
 
   const answersListElement = document.getElementById(ANSWERS_LIST_ID);
-
   for (const [key, answerText] of Object.entries(currentQuestion.answers)) {
     const answerElement = createAnswerElement(key, answerText);
     answersListElement.appendChild(answerElement);
   }
+
+  const process = initProcess();
+  userInterface.appendChild(process);
 
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)

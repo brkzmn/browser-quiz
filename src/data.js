@@ -10,6 +10,7 @@
     not by your logic
     not by your listeners
 */
+export const prizes = ['100','200','500']
 
 export const quizData = {
   currentQuestionIndex: 0,
@@ -55,6 +56,26 @@ export const quizData = {
           text: 'MDN',
           href:
             'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof',
+        },
+      ],
+    },
+    {
+      text: '11What are the different ways to declare a JS variable?',
+      answers: {
+        a: 'constant, let, variable',
+        b: 'var, const, let, function',
+        c: 'var, let, const',
+      },
+      correct: 'c',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/variables',
+        },
+        {
+          text: 'Tyler McGinnis',
+          href: 'https://ui.dev/var-let-const/',
         },
       ],
     },

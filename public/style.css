@@ -53,3 +53,17 @@ ul {
 .answer-list-item label:hover {
   background-color: #e4a940;
 }
+
+#process-bar-element{
+  border: 1px solid black;
+}
+#process-bar-element li{
+  border: 1px solid red;
+}
+
+.active{
+  background-color: tomato;
+}
+.disabled{
+  background-color: lightslategrey;
+}
