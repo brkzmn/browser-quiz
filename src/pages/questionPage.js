@@ -20,13 +20,38 @@ export const initQuestionPage = () => {
     answersListElement.appendChild(answerElement);
   }
 
+
   const process = initProcess();
   userInterface.appendChild(process);
 
   document
     .getElementById(NEXT_QUESTION_BUTTON_ID)
     .addEventListener('click', nextQuestion);
+
+  const inputs = document.getElementsByTagName('label');
+  Array.from(inputs).forEach(input => {
+    input.addEventListener("click", rightAnswer);
+  });
+ 
 };
+
+const rightAnswer = (e) => {
+  e.target.previousElementSibling.checked = true
+  const inputs = document.querySelectorAll('input[name="answer"]');
+  if(Array.from(inputs).some(input => input.checked)){
+    setTimeout(() => {
+      const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+      const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
+      rightAnswer.style.backgroundColor = 'green';
+    }, 2000);
+    
+    
+  }
+  
+}
+
+
+
 
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
