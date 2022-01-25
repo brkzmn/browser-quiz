@@ -10,6 +10,7 @@
     not by your logic
     not by your listeners
 */
+export const prizes = ['100','200','500']
 
 export const quizData = {
   currentQuestionIndex: 0,
@@ -22,7 +23,6 @@ export const quizData = {
         b: 'var, const, let, function',
         c: 'var, let, const',
       },
-      prize : '$100',
       correct: 'c',
       selected: null,
       links: [
@@ -44,7 +44,6 @@ export const quizData = {
         c: 'determines if a value is primitive',
         d: 'can tell the difference between arrays and objects',
       },
-      prize : '$200',
       correct: 'b',
       selected: null,
       links: [
@@ -66,7 +65,6 @@ export const quizData = {
         b: 'var, const, let, function',
         c: 'var, let, const',
       },
-      prize : '$100',
       correct: 'c',
       selected: null,
       links: [
