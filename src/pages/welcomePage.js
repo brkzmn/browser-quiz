@@ -11,6 +11,7 @@ export const initWelcomePage = () => {
     document
     .getElementById(START_BUTTON_ID)
     .addEventListener('click', () => {
+        localStorage.removeItem('fiftyFiftyIsUsed')
         initQuestionPage();
         userInterface.removeChild(welcome);
     });

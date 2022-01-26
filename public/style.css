@@ -71,3 +71,7 @@ ul {
 .pointer-none {
   pointer-events: none;
 }
+
+.wrong-answer{
+  color: rgba(0,0,0,0) !important;
+}

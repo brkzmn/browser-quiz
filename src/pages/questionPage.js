@@ -1,17 +1,25 @@
 'use strict';
 
-import { ANSWERS_LIST_ID, USER_INTERFACE_ID } from '../constants.js';
+import { ANSWERS_LIST_ID, USER_INTERFACE_ID, FIFTY_BUTTON_ID } from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { initProcess } from '../views/processView.js';
+import { getHelpElement } from '../views/helpView.js';
 
 
 export const initQuestionPage = () => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  const userInterface = document.getElementById(USER_INTERFACE_ID);
+
+  const helpElement = getHelpElement();
+  if (localStorage.getItem('fiftyFiftyIsUsed') === 'true' ){
+    helpElement.firstElementChild.disabled = true;
+  }
+  userInterface.appendChild(helpElement);
+
 
   const questionElement = getQuestionElement(currentQuestion.text);
-  const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.appendChild(questionElement);
 
   const answersListElement = document.getElementById(ANSWERS_LIST_ID);
@@ -30,6 +38,9 @@ export const initQuestionPage = () => {
       nextQuestion(e);
     });
   });
+
+  const buttonElement = document.getElementById(FIFTY_BUTTON_ID);
+  buttonElement.addEventListener('click',fiftyFifty)
  
 };
 
@@ -66,4 +77,20 @@ const nextQuestion = (e) => {
     }, 5000);
   }
   
+};
+
+const fiftyFifty = () => {
+  const curQuestion = quizData.questions[quizData.currentQuestionIndex]
+  const allAnswers = ['a','b','c','d'];
+  const wrongAnswers = collect(allAnswers)
+    .reject(answer => answer == curQuestion.correct)
+    .shuffle()
+    .slice(0,2)
+    .each((answer) => {
+      const nextElement = document.getElementById(answer).nextElementSibling.classList.add('wrong-answer');
+    })
+  const button = document.getElementById(FIFTY_BUTTON_ID)
+  button.disabled = true;
+  localStorage.setItem('fiftyFiftyIsUsed', 'true');
+
 };
