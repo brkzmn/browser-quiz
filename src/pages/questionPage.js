@@ -5,11 +5,12 @@ import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { initProcess } from '../views/processView.js';
+import { initGameOverPage } from './gameOverPage.js';
 
 
 export const initQuestionPage = () => {
+  
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-
   const questionElement = getQuestionElement(currentQuestion.text);
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.appendChild(questionElement);
@@ -41,28 +42,29 @@ const IsAnswerRight = (e) => {
   
   setTimeout(() => {
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-    const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
-    rightAnswer.style.backgroundColor = 'green';
+    setTimeout(() => {
+      const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
+      rightAnswer.style.backgroundColor = 'green';
+    }, 500)
     if(e.target.previousElementSibling.id !== currentQuestion.correct){
       e.target.style.backgroundColor = 'red'
     }
-  }, 2000);
+  }, 1500);
 }
 
 const nextQuestion = (e) => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
-  
+  const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
   if(e.target.previousElementSibling.id === currentQuestion.correct){
     setTimeout(() => {
       quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-      const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
       userInterfaceElement.innerHTML = '';
       initQuestionPage();
     }, 5000);
   }else {
     setTimeout(() => {
-      const lostScreen = document.getElementById('user-interface')
-      lostScreen.innerHTML = `LOST`
+      userInterfaceElement.innerHTML = '';
+      initGameOverPage()
     }, 5000);
   }
   
