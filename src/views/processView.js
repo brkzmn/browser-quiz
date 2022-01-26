@@ -7,7 +7,7 @@ export const initProcess = () => {
   processElement.classList.add('process-bar-list');
   quizData.questions.forEach((element, index) => {
     const liElement = document.createElement('li');
-    liElement.textContent = `${index + 1} --- ${prizes[index]}$`;
+    liElement.textContent = `${index + 1} -- ${prizes[index]}$`;
     processElement.appendChild(liElement);
   });
   const liArray = Array.from(processElement.children);

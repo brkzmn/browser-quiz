@@ -25,31 +25,62 @@ body {
   background-color: var(--clr-blue-dark);
   color: var(--clr-white);
 }
-/*main div*/
+/*----main div-----*/
 .centered {
-  max-width: 1200px;
+  max-width: 1000px;
+  min-height: 100vh;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   padding: var(--space-md);
 }
 
-.scrollable {
+.logo {
+  width: 21rem;
   height: auto;
-  max-height: 80vh;
-  overflow: auto;
 }
 
-/*----question----*/
+/*-----welcome page----*/
+.welcome-container {
+  text-align: center;
+}
+
+.welcome-title {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  width: 8rem;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-md);
+  border-radius: 0.5rem;
+  color: var(--clr-white);
+  background: transparent;
+  border: 1px solid var(--clr-white);
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: var(--clr-black);
+  background-color: var(--clr-white);
+  border: none;
+  transition: all 0.1s linear;
+}
+
+/*----question pages----*/
 .question-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex: 2;
 }
 .question-title {
-  font-size: 2.2rem;
-  margin-bottom: var(--space-md);
+  margin: var(--space-md) 0;
 }
 
 ul {
@@ -103,19 +134,19 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25%;
+  flex: 1;
 }
 
 .process-bar-list {
   display: flex;
   flex-direction: column-reverse;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .process-bar-list li {
   margin-bottom: var(--space-sm);
-  padding: var(--space-sm);
-  clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+  padding: 0.1rem var(--space-sm);
+  clip-path: polygon(100% 0, 100% 100%, 10% 100%, 0 50%, 10% 0);
 }
 
 .active-bar {
@@ -133,4 +164,26 @@ ul {
 
 .wrong-answer{
   color: rgba(0,0,0,0) !important;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 20rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    width: 18rem;
+  }
+  #answers-list {
+    grid-template-columns: 1fr;
+  }
+  #process-bar-element {
+    margin-left: var(--space-md);
+    flex: 1;
+  }
+  .question-wrapper {
+    flex: 1;
+  }
 }
