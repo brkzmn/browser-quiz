@@ -13,7 +13,11 @@ export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
 
   const helpElement = getHelpElement();
+  if (localStorage.getItem('fiftyFiftyIsUsed') === 'true' ){
+    helpElement.firstElementChild.disabled = true;
+  }
   userInterface.appendChild(helpElement);
+
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -85,5 +89,8 @@ const fiftyFifty = () => {
     .each((answer) => {
       const nextElement = document.getElementById(answer).nextElementSibling.classList.add('wrong-answer');
     })
-  
+  const button = document.getElementById(FIFTY_BUTTON_ID)
+  button.disabled = true;
+  localStorage.setItem('fiftyFiftyIsUsed', 'true');
+
 };
