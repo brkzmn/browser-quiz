@@ -9,7 +9,7 @@ import { getHelpElement } from '../views/helpView.js';
 
 
 export const initQuestionPage = () => {
-  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  const currentQuestion = getCurrentQuestion();
   const userInterface = document.getElementById(USER_INTERFACE_ID);
 
   const helpElement = getHelpElement();
@@ -17,7 +17,6 @@ export const initQuestionPage = () => {
     helpElement.firstElementChild.disabled = true;
   }
   userInterface.appendChild(helpElement);
-
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -41,7 +40,6 @@ export const initQuestionPage = () => {
 
   const buttonElement = document.getElementById(FIFTY_BUTTON_ID);
   buttonElement.addEventListener('click',fiftyFifty)
- 
 };
 
 const IsAnswerRight = (e) => {
@@ -51,7 +49,7 @@ const IsAnswerRight = (e) => {
   })
   
   setTimeout(() => {
-    const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+    const currentQuestion = getCurrentQuestion(); 
     const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
     rightAnswer.style.backgroundColor = 'green';
     if(e.target.previousElementSibling.id !== currentQuestion.correct){
@@ -60,12 +58,21 @@ const IsAnswerRight = (e) => {
   }, 2000);
 }
 
+const getCurrentQuestion = () => {
+  const order = localStorage.getItem('ids').split(',');
+  const newIndex = parseInt(order[quizData.currentQuestionIndex]);
+  
+  return quizData.questions.filter((item) => item.id === newIndex)[0];
+}
+
 const nextQuestion = (e) => {
-  const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
+  const currentQuestion = getCurrentQuestion();
   
   if(e.target.previousElementSibling.id === currentQuestion.correct){
     setTimeout(() => {
       quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+      getCurrentQuestion()
+
       const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
       userInterfaceElement.innerHTML = '';
       initQuestionPage();

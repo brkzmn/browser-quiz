@@ -5,13 +5,12 @@ import { initWelcomePage } from './pages/welcomePage.js';
 
 
 const loadApp = () => {
-
   initWelcomePage();
   shuffleQuestions();
 };
 
 const shuffleQuestions = () => {
-  const questionIds = ["fdf"];
+  const questionIds = [];
 
   collect(quizData.questions).where('difficulty','easy').shuffle().slice(0,5).each((question) => {
     questionIds.push(question.id);
