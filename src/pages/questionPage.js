@@ -6,7 +6,9 @@ import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { initProcess } from '../views/processView.js';
 import { initGameOverPage } from './gameOverPage.js';
+import { initBreakpointPage } from './breakpointPage.js';
 import { getFiftyFiftyElement } from '../views/helpView.js';
+
 
 export const initQuestionPage = () => {
   const currentQuestion = getCurrentQuestion();
@@ -68,13 +70,18 @@ const getCurrentQuestion = () => {
 
 const nextQuestion = (e) => {
   const currentQuestion = getCurrentQuestion();
-  
+  const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
+
   if(e.target.previousElementSibling.id === currentQuestion.correct){
     setTimeout(() => {
-      quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-      const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
-      userInterfaceElement.innerHTML = '';
-      initQuestionPage();
+      if(quizData.currentQuestionIndex + 1 === 5 || quizData.currentQuestionIndex + 1 === 10) {
+        userInterfaceElement.innerHTML = '';
+        initBreakpointPage(quizData.currentQuestionIndex + 1);
+      } else  {
+        quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+        userInterfaceElement.innerHTML = '';
+        initQuestionPage();
+      }
     }, 5000);
   } else {
     setTimeout(() => {
@@ -82,6 +89,7 @@ const nextQuestion = (e) => {
       initGameOverPage()
     }, 5000);
   }
+
 };
 
 const getFiftyFiftyElement = () => {
