@@ -17,6 +17,7 @@ export const quizData = {
   // the questions in the quiz
   questions: [
     {
+      id: 1,
       text: 'What are the different ways to declare a JS variable?',
       answers: {
         a: 'constant, let, variable',
@@ -25,7 +26,7 @@ export const quizData = {
         d: 'var, let, const',
       },
       correct: 'c',
-      selected: null,
+      difficulty: 'easy',
       links: [
         {
           text: 'javascript.info',
@@ -38,6 +39,7 @@ export const quizData = {
       ],
     },
     {
+      id: 2,
       text: 'What does `typeof` do?',
       answers: {
         a: 'changes the type of a primitive value',
@@ -46,7 +48,7 @@ export const quizData = {
         d: 'can tell the difference between arrays and objects',
       },
       correct: 'b',
-      selected: null,
+      difficulty: 'easy',
       links: [
         {
           text: 'javascript.info',
@@ -60,25 +62,175 @@ export const quizData = {
       ],
     },
     {
-      text: '11What are the different ways to declare a JS variable?',
+      id: 3,
+      text: 'This is the question  3?',
       answers: {
-        a: 'constant, let, variable',
-        b: 'var, const, let, function',
-        c: 'var, let, const',
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
       },
       correct: 'c',
-      selected: null,
-      links: [
-        {
-          text: 'javascript.info',
-          href: 'https://javascript.info/variables',
-        },
-        {
-          text: 'Tyler McGinnis',
-          href: 'https://ui.dev/var-let-const/',
-        },
-      ],
+      difficulty: 'easy',
+      links: [],
     },
+    {
+      id: 4,
+      text: 'This is the question  4?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'easy',
+      links: [],
+    },
+    {
+      id: 5,
+      text: 'This is the question  5?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'easy',
+      links: [],
+    },
+    {
+      id: 6,
+      text: 'This is the question  6?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'medium',
+      links: [],
+    },
+    {
+      id: 7,
+      text: 'This is the question  7?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'medium',
+      links: [],
+    },
+    {
+      id: 8,
+      text: 'This is the question  8?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'medium',
+      links: [],
+    },
+    {
+      id: 9,
+      text: 'This is the question  9?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'medium',
+      links: [],
+    },
+    {
+      id: 10,
+      text: 'This is the question 10?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'medium',
+      links: [],
+    },
+    {
+      id: 11,
+      text: 'This is the question 11?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'hard',
+      links: [],
+    },
+    {
+      id: 12,
+      text: 'This is the question 12?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'hard',
+      links: [],
+    },
+    {
+      id: 13,
+      text: 'This is the question 13?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'hard',
+      links: [],
+    },
+    {
+      id: 14,
+      text: 'This is the question 14?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'hard',
+      links: [],
+    },
+    {
+      id: 15,
+      text: 'This is the question?',
+      answers: {
+        a: 'Answer A',
+        b: 'Answer B',
+        c: 'Answer C',
+        d: 'Answer D',
+      },
+      correct: 'c',
+      difficulty: 'hard',
+      links: [],
+    },
+    
     // Add more questions here
   ],
 };
