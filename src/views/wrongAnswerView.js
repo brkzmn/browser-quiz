@@ -1,5 +1,6 @@
 'use strict';
 import { quizData } from '../data.js';
+import { RESTART_BUTTON_ID } from '../constants.js';
 
 export const createWrongAnswerPage = () => {
   const index = quizData.currentQuestionIndex
@@ -14,9 +15,10 @@ export const createWrongAnswerPage = () => {
   const element = document.createElement('div');
   // I use String.raw just to get fancy colors for the HTML in VS Code.
   element.innerHTML = String.raw`
+    <img class="logo" src="../public/assets/logo_millionaire.webp" alt="game logo">
     <h1>OPPPS! WRONG ANSWER</h1>
     <p>You won ${prize}</p>
-    <button id="restart">RESTART</button>
+    <button id="${RESTART_BUTTON_ID}" class="btn">RESTART</button>
     `;
   
     return element;

@@ -12,7 +12,7 @@ export const initGameOverPage = () => {
         userInterface.innerHTML = ''
         setTimeout(() => {
             initWelcomePage()
-        },500)
+        },300)
         
     })
 }
