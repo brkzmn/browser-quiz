@@ -72,10 +72,8 @@ const nextQuestion = (e) => {
   const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
 
   if(e.target.previousElementSibling.id === currentQuestion.correct){
-    // quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
     setTimeout(() => {
       if(quizData.currentQuestionIndex + 1 === 5 || quizData.currentQuestionIndex + 1 === 10) {
-
         userInterfaceElement.innerHTML = '';
         initBreakpointPage(quizData.currentQuestionIndex + 1);
       } else  {
@@ -91,24 +89,6 @@ const nextQuestion = (e) => {
     }, 5000);
   }
 
-
-  
-/*   if(e.target.previousElementSibling.id === currentQuestion.correct){
-    if(quizData.currentQuestionIndex === 5 || quizData.currentQuestionIndex === 10) {
-      getBreakpointView(quizData.currentQuestionIndex);
-    }
-    setTimeout(() => {
-      quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-      const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
-      userInterfaceElement.innerHTML = '';
-      initQuestionPage();
-    }, 5000);
-  } else {
-    setTimeout(() => {
-      userInterfaceElement.innerHTML = '';
-      initGameOverPage()
-    }, 5000);
-  } */
 };
 
 const fiftyFifty = () => {
