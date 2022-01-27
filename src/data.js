@@ -10,7 +10,7 @@
     not by your logic
     not by your listeners
 */
-export const prizes = ['100','200','500']
+export const prizes = ['100','200','500', '1000', '2000', '2000', '2000', '2000', '2000', '10000'];
 
 export const quizData = {
   currentQuestionIndex: 0,
