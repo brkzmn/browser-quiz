@@ -37,6 +37,7 @@ export const initQuestionPage = () => {
     input.addEventListener('click', (e) => {
       IsAnswerRight(e);
       nextQuestion(e);
+      playAudio(2);
     });
   });
 
@@ -55,11 +56,35 @@ const IsAnswerRight = (e) => {
     setTimeout(() => {
       const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
       rightAnswer.style.backgroundColor = 'green';
-    }, 500)
+      (e.target.previousElementSibling.id !== currentQuestion.correct) ? playAudio(0) : playAudio(1);
+    }, 200)
     if(e.target.previousElementSibling.id !== currentQuestion.correct){
-      e.target.style.backgroundColor = 'red'
+      e.target.style.backgroundColor = 'red';
     }
-  }, 1500);
+  }, 2000);
+}
+
+const playAudio = (e) => {
+  const right = new Audio('../../public/assets/sounds/correct_answer.mp3');
+  const wrong = new Audio('../../public/assets/sounds/wrong_answer.mp3');
+  const waiting = new Audio('../../public/assets/sounds/waiting_answer.mp3');
+
+  if (e === 2) {
+    waiting.play();
+    setTimeout(() => {
+      waiting.pause()
+    },2000)
+  }
+  if (e === 1){
+    right.play();
+    setTimeout(() =>{
+      right.pause()
+    },3200)
+  }
+  if (e === 0){
+    right.pause();
+    wrong.play();
+  }
 }
 
 const getCurrentQuestion = () => {
