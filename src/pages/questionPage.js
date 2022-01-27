@@ -5,6 +5,7 @@ import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { initProcess } from '../views/processView.js';
+import { initGameOverPage } from './gameOverPage.js';
 import { getHelpElement } from '../views/helpView.js';
 
 export const initQuestionPage = () => {
@@ -48,20 +49,20 @@ const IsAnswerRight = (e) => {
   });
 
   setTimeout(() => {
-
     const currentQuestion = getCurrentQuestion(); 
-    const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
-    rightAnswer.style.backgroundColor = 'green';
-    if (e.target.previousElementSibling.id !== currentQuestion.correct) {
-      e.target.style.backgroundColor = 'red';
+    setTimeout(() => {
+      const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
+      rightAnswer.style.backgroundColor = 'green';
+    }, 500)
+    if(e.target.previousElementSibling.id !== currentQuestion.correct){
+      e.target.style.backgroundColor = 'red'
     }
-  }, 2000);
-};
+  }, 1500);
+}
 
 const getCurrentQuestion = () => {
   const order = localStorage.getItem('ids').split(',');
   const newIndex = parseInt(order[quizData.currentQuestionIndex]);
-  
   return quizData.questions.filter((item) => item.id === newIndex)[0];
 }
 
@@ -71,16 +72,14 @@ const nextQuestion = (e) => {
   if(e.target.previousElementSibling.id === currentQuestion.correct){
     setTimeout(() => {
       quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-      getCurrentQuestion()
-
       const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
       userInterfaceElement.innerHTML = '';
       initQuestionPage();
     }, 5000);
   } else {
     setTimeout(() => {
-      const lostScreen = document.getElementById('user-interface');
-      lostScreen.innerHTML = `LOST`;
+      userInterfaceElement.innerHTML = '';
+      initGameOverPage()
     }, 5000);
   }
 };
