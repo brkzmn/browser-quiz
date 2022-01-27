@@ -6,17 +6,17 @@ import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { initProcess } from '../views/processView.js';
 import { initGameOverPage } from './gameOverPage.js';
-import { getHelpElement } from '../views/helpView.js';
+import { getFiftyFiftyElement } from '../views/helpView.js';
 
 export const initQuestionPage = () => {
   const currentQuestion = getCurrentQuestion();
   const userInterface = document.getElementById(USER_INTERFACE_ID);
 
-  const helpElement = getHelpElement();
+  const fiftyFiftyElement = getFiftyFiftyElement();
   if (localStorage.getItem('fiftyFiftyIsUsed') === 'true' ){
-    helpElement.firstElementChild.disabled = true;
+    fiftyFiftyElement.firstElementChild.disabled = true;
   }
-  userInterface.appendChild(helpElement);
+  userInterface.appendChild(fiftyFiftyElement);
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -84,7 +84,7 @@ const nextQuestion = (e) => {
   }
 };
 
-const fiftyFifty = () => {
+const getFiftyFiftyElement = () => {
   const curQuestion = quizData.questions[quizData.currentQuestionIndex]
   const allAnswers = ['a','b','c','d'];
   const wrongAnswers = collect(allAnswers)
