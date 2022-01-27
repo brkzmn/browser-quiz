@@ -117,8 +117,8 @@ const nextQuestion = (e) => {
 
 };
 
-const getFiftyFiftyElement = () => {
-  const curQuestion = quizData.questions[quizData.currentQuestionIndex]
+const fiftyFifty = () => {
+  const curQuestion = getCurrentQuestion();
   const allAnswers = ['a','b','c','d'];
   const wrongAnswers = collect(allAnswers)
     .reject(answer => answer == curQuestion.correct)
