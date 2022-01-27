@@ -13,3 +13,5 @@ export const NEXT_QUESTION_BUTTON_ID = 'next-question-button';
 export const PROCESS_BAR_ID = 'process-bar-element';
 export const START_BUTTON_ID = 'start-button';
 export const RESTART_BUTTON_ID = 'restart-button';
+export const FIFTY_BUTTON_ID = 'fifty-button';
+
