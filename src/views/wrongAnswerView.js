@@ -18,7 +18,7 @@ export const createWrongAnswerPage = () => {
     <img class="logo" src="../public/assets/logo_millionaire.webp" alt="game logo">
     <h1>OPPPS! WRONG ANSWER</h1>
     <p>You won ${prize}</p>
-    <button id="${RESTART_BUTTON_ID}" class="btn">RESTART</button>
+    <button id="${RESTART_BUTTON_ID}" >RESTART</button>
     `;
   
     return element;
