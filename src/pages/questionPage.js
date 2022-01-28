@@ -1,6 +1,6 @@
 'use strict';
 
-import { ANSWERS_LIST_ID, USER_INTERFACE_ID, FIFTY_BUTTON_ID } from '../constants.js';
+import { ANSWERS_LIST_ID, USER_INTERFACE_ID, FIFTY_BUTTON_ID, TIMER_INTERFACE_ID } from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
@@ -8,7 +8,7 @@ import { initProcess } from '../views/processView.js';
 import { initGameOverPage } from './gameOverPage.js';
 import { initBreakpointPage } from './breakpointPage.js';
 import { getFiftyFiftyElement } from '../views/helpView.js';
-
+import { initTimer } from '../views/timerView.js';
 
 export const initQuestionPage = () => {
   const currentQuestion = getCurrentQuestion();
@@ -19,6 +19,10 @@ export const initQuestionPage = () => {
     fiftyFiftyElement.firstElementChild.disabled = true;
   }
   userInterface.appendChild(fiftyFiftyElement);
+
+  const timerElement = initTimer();
+  userInterface.appendChild(timerElement);
+  getTimer(15);
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -131,3 +135,21 @@ const fiftyFifty = () => {
   localStorage.setItem('fiftyFiftyIsUsed', 'true');
 
 };
+
+const getTimer = (time) => {
+
+  var counter = setInterval(timer, 1000);
+  const timeDiv = document.getElementById(TIMER_INTERFACE_ID);
+  function timer() {
+    timeDiv.textContent = time;
+    time--;
+    if(time < 9) {
+      let number = timeDiv.textContent;
+      timeDiv.textContent = `0${number}`; 
+    }
+    if(time < 0 ) {
+      clearInterval(counter);
+      timeDiv.textContent = '00';
+    } 
+  }
+}
