@@ -1,6 +1,10 @@
 'use strict';
 
-import { ANSWERS_LIST_ID, USER_INTERFACE_ID, FIFTY_BUTTON_ID } from '../constants.js';
+import {
+  ANSWERS_LIST_ID,
+  USER_INTERFACE_ID,
+  FIFTY_BUTTON_ID,
+} from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
@@ -9,13 +13,13 @@ import { initGameOverPage } from './gameOverPage.js';
 import { initBreakpointPage } from './breakpointPage.js';
 import { getFiftyFiftyElement } from '../views/helpView.js';
 
-
 export const initQuestionPage = () => {
   const currentQuestion = getCurrentQuestion();
+  shuffleAnswers(currentQuestion);
   const userInterface = document.getElementById(USER_INTERFACE_ID);
 
   const fiftyFiftyElement = getFiftyFiftyElement();
-  if (localStorage.getItem('fiftyFiftyIsUsed') === 'true' ){
+  if (localStorage.getItem('fiftyFiftyIsUsed') === 'true') {
     fiftyFiftyElement.firstElementChild.disabled = true;
   }
   userInterface.appendChild(fiftyFiftyElement);
@@ -42,7 +46,7 @@ export const initQuestionPage = () => {
   });
 
   const buttonElement = document.getElementById(FIFTY_BUTTON_ID);
-  buttonElement.addEventListener('click',fiftyFifty)
+  buttonElement.addEventListener('click', fiftyFifty);
 };
 
 const IsAnswerRight = (e) => {
@@ -52,17 +56,20 @@ const IsAnswerRight = (e) => {
   });
 
   setTimeout(() => {
-    const currentQuestion = getCurrentQuestion(); 
+    const currentQuestion = getCurrentQuestion();
     setTimeout(() => {
-      const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
+      const rightAnswer = document.getElementById(currentQuestion.correct)
+        .nextElementSibling;
       rightAnswer.style.backgroundColor = 'green';
-      (e.target.previousElementSibling.id !== currentQuestion.correct) ? playAudio(0) : playAudio(1);
-    }, 200)
-    if(e.target.previousElementSibling.id !== currentQuestion.correct){
+      e.target.previousElementSibling.id !== currentQuestion.correct
+        ? playAudio(0)
+        : playAudio(1);
+    }, 200);
+    if (e.target.previousElementSibling.id !== currentQuestion.correct) {
       e.target.style.backgroundColor = 'red';
     }
   }, 2000);
-}
+};
 
 const playAudio = (e) => {
   const right = new Audio('../../public/assets/sounds/correct_answer.mp3');
@@ -72,36 +79,39 @@ const playAudio = (e) => {
   if (e === 2) {
     waiting.play();
     setTimeout(() => {
-      waiting.pause()
-    },2000)
+      waiting.pause();
+    }, 2000);
   }
-  if (e === 1){
+  if (e === 1) {
     right.play();
-    setTimeout(() =>{
-      right.pause()
-    },3200)
+    setTimeout(() => {
+      right.pause();
+    }, 3200);
   }
-  if (e === 0){
+  if (e === 0) {
     right.pause();
     wrong.play();
   }
-}
+};
 
 export const getCurrentQuestion = () => {
   const order = localStorage.getItem('ids').split(',');
   const newIndex = parseInt(order[quizData.currentQuestionIndex]);
   return quizData.questions.filter((item) => item.id === newIndex)[0];
-}
+};
 
 const nextQuestion = (e) => {
   const currentQuestion = getCurrentQuestion();
   const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
-  if(e.target.previousElementSibling.id === currentQuestion.correct){
+  if (e.target.previousElementSibling.id === currentQuestion.correct) {
     setTimeout(() => {
-      if(quizData.currentQuestionIndex + 1 === 5 || quizData.currentQuestionIndex + 1 === 10) {
+      if (
+        quizData.currentQuestionIndex + 1 === 5 ||
+        quizData.currentQuestionIndex + 1 === 10
+      ) {
         userInterfaceElement.innerHTML = '';
         initBreakpointPage(quizData.currentQuestionIndex + 1);
-      } else  {
+      } else {
         quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
         userInterfaceElement.innerHTML = '';
         initQuestionPage();
@@ -110,24 +120,43 @@ const nextQuestion = (e) => {
   } else {
     setTimeout(() => {
       userInterfaceElement.innerHTML = '';
-      initGameOverPage()
+      initGameOverPage();
     }, 5000);
   }
-
 };
 
 const fiftyFifty = () => {
   const curQuestion = getCurrentQuestion();
-  const allAnswers = ['a','b','c','d'];
+  const allAnswers = ['a', 'b', 'c', 'd'];
   const wrongAnswers = collect(allAnswers)
-    .reject(answer => answer == curQuestion.correct)
+    .reject((answer) => answer == curQuestion.correct)
     .shuffle()
-    .slice(0,2)
+    .slice(0, 2)
     .each((answer) => {
-      const nextElement = document.getElementById(answer).nextElementSibling.classList.add('wrong-answer');
-    })
-  const button = document.getElementById(FIFTY_BUTTON_ID)
+      const nextElement = document
+        .getElementById(answer)
+        .nextElementSibling.classList.add('wrong-answer');
+    });
+  const button = document.getElementById(FIFTY_BUTTON_ID);
   button.disabled = true;
   localStorage.setItem('fiftyFiftyIsUsed', 'true');
+};
 
+const shuffleAnswers = (question) => {
+  const correctVal = question.answers[question.correct];
+  const shuffledValues = collect(Object.values(question.answers)).shuffle();
+
+  question.answers = {
+    a: shuffledValues.items[0],
+    b: shuffledValues.items[1],
+    c: shuffledValues.items[2],
+    d: shuffledValues.items[3],
+  };
+
+  for (const [key, value] of Object.entries(question.answers)) {
+    if (value === correctVal) {
+      question.correct = key;
+    }
+  }
+  return question;
 };
