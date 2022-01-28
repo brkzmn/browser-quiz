@@ -43,7 +43,8 @@ body {
 /*-----welcome page----*/
 .welcome-container,
 .wrong-answer-container,
-.finish-page-container {
+.finish-page-container,
+.breakpoint-page-container {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -95,6 +96,7 @@ body {
     rgba(18, 19, 82, 0.9374124649859944) 51%,
     rgba(70, 125, 143, 1) 100%
   );
+  /* gradient for 50:50 button*/
   color: var(--clr-orange-dark);
   border: 1px solid var(--clr-aqua);
   border-radius: 4rem;
@@ -112,6 +114,12 @@ body {
 #fifty-button:disabled {
   opacity: 0.4;
   cursor: unset;
+}
+
+.breakpoint-btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
 /*----question pages----*/
