@@ -6,17 +6,19 @@ import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { initProcess } from '../views/processView.js';
 import { initGameOverPage } from './gameOverPage.js';
-import { getHelpElement } from '../views/helpView.js';
+import { initBreakpointPage } from './breakpointPage.js';
+import { getFiftyFiftyElement } from '../views/helpView.js';
+
 
 export const initQuestionPage = () => {
   const currentQuestion = getCurrentQuestion();
   const userInterface = document.getElementById(USER_INTERFACE_ID);
 
-  const helpElement = getHelpElement();
+  const fiftyFiftyElement = getFiftyFiftyElement();
   if (localStorage.getItem('fiftyFiftyIsUsed') === 'true' ){
-    helpElement.firstElementChild.disabled = true;
+    fiftyFiftyElement.firstElementChild.disabled = true;
   }
-  userInterface.appendChild(helpElement);
+  userInterface.appendChild(fiftyFiftyElement);
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -35,6 +37,7 @@ export const initQuestionPage = () => {
     input.addEventListener('click', (e) => {
       IsAnswerRight(e);
       nextQuestion(e);
+      playAudio(2);
     });
   });
 
@@ -53,11 +56,35 @@ const IsAnswerRight = (e) => {
     setTimeout(() => {
       const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
       rightAnswer.style.backgroundColor = 'green';
-    }, 500)
+      (e.target.previousElementSibling.id !== currentQuestion.correct) ? playAudio(0) : playAudio(1);
+    }, 200)
     if(e.target.previousElementSibling.id !== currentQuestion.correct){
-      e.target.style.backgroundColor = 'red'
+      e.target.style.backgroundColor = 'red';
     }
-  }, 1500);
+  }, 2000);
+}
+
+const playAudio = (e) => {
+  const right = new Audio('../../public/assets/sounds/correct_answer.mp3');
+  const wrong = new Audio('../../public/assets/sounds/wrong_answer.mp3');
+  const waiting = new Audio('../../public/assets/sounds/waiting_answer.mp3');
+
+  if (e === 2) {
+    waiting.play();
+    setTimeout(() => {
+      waiting.pause()
+    },2000)
+  }
+  if (e === 1){
+    right.play();
+    setTimeout(() =>{
+      right.pause()
+    },3200)
+  }
+  if (e === 0){
+    right.pause();
+    wrong.play();
+  }
 }
 
 export const getCurrentQuestion = () => {
@@ -71,9 +98,14 @@ const nextQuestion = (e) => {
   const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
   if(e.target.previousElementSibling.id === currentQuestion.correct){
     setTimeout(() => {
-      quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-      userInterfaceElement.innerHTML = '';
-      initQuestionPage();
+      if(quizData.currentQuestionIndex + 1 === 5 || quizData.currentQuestionIndex + 1 === 10) {
+        userInterfaceElement.innerHTML = '';
+        initBreakpointPage(quizData.currentQuestionIndex + 1);
+      } else  {
+        quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
+        userInterfaceElement.innerHTML = '';
+        initQuestionPage();
+      }
     }, 5000);
   } else {
     setTimeout(() => {
@@ -81,10 +113,11 @@ const nextQuestion = (e) => {
       initGameOverPage()
     }, 5000);
   }
+
 };
 
 const fiftyFifty = () => {
-  const curQuestion = quizData.questions[quizData.currentQuestionIndex]
+  const curQuestion = getCurrentQuestion();
   const allAnswers = ['a','b','c','d'];
   const wrongAnswers = collect(allAnswers)
     .reject(answer => answer == curQuestion.correct)
