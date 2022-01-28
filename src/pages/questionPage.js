@@ -6,9 +6,12 @@ import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { initProcess } from '../views/processView.js';
 import { initGameOverPage } from './gameOverPage.js';
+import { initTimeOutPage } from './timeOutPage.js';
 import { initBreakpointPage } from './breakpointPage.js';
 import { getFiftyFiftyElement } from '../views/helpView.js';
 import { initTimer } from '../views/timerView.js';
+let a;
+
 
 export const initQuestionPage = () => {
   const currentQuestion = getCurrentQuestion();
@@ -42,6 +45,7 @@ export const initQuestionPage = () => {
       IsAnswerRight(e);
       nextQuestion(e);
       playAudio(2);
+      clearInterval(a);
     });
   });
 
@@ -138,7 +142,7 @@ const fiftyFifty = () => {
 
 const getTimer = (time) => {
 
-  var counter = setInterval(timer, 1000);
+  a = setInterval(timer, 1000);
   const timeDiv = document.getElementById(TIMER_INTERFACE_ID);
   function timer() {
     timeDiv.textContent = time;
@@ -148,8 +152,10 @@ const getTimer = (time) => {
       timeDiv.textContent = `0${number}`; 
     }
     if(time < 0 ) {
-      clearInterval(counter);
+      clearInterval(a);
       timeDiv.textContent = '00';
+      initTimeOutPage();
+
     } 
   }
 }
