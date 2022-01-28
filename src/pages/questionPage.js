@@ -87,7 +87,7 @@ const playAudio = (e) => {
   }
 }
 
-const getCurrentQuestion = () => {
+export const getCurrentQuestion = () => {
   const order = localStorage.getItem('ids').split(',');
   const newIndex = parseInt(order[quizData.currentQuestionIndex]);
   return quizData.questions.filter((item) => item.id === newIndex)[0];
@@ -96,7 +96,6 @@ const getCurrentQuestion = () => {
 const nextQuestion = (e) => {
   const currentQuestion = getCurrentQuestion();
   const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
-
   if(e.target.previousElementSibling.id === currentQuestion.correct){
     setTimeout(() => {
       if(quizData.currentQuestionIndex + 1 === 5 || quizData.currentQuestionIndex + 1 === 10) {
