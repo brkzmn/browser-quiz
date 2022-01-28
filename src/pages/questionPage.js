@@ -1,6 +1,6 @@
 'use strict';
 
-import { ANSWERS_LIST_ID, USER_INTERFACE_ID, FIFTY_BUTTON_ID, TIMER_INTERFACE_ID } from '../constants.js';
+import { ANSWERS_LIST_ID, USER_INTERFACE_ID, FIFTY_BUTTON_ID, TIMER_INTERFACE_TEXT_ID } from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
@@ -25,7 +25,7 @@ export const initQuestionPage = () => {
 
   const timerElement = initTimer();
   userInterface.appendChild(timerElement);
-  getTimer(15);
+  getTimer(30);
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -143,7 +143,7 @@ const fiftyFifty = () => {
 const getTimer = (time) => {
 
   a = setInterval(timer, 1000);
-  const timeDiv = document.getElementById(TIMER_INTERFACE_ID);
+  const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID);
   function timer() {
     timeDiv.textContent = time;
     time--;
