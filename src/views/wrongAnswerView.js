@@ -10,10 +10,10 @@ export const createWrongAnswerPage = () => {
     prize = '$ 0'
   }
   if(index >= 5 && index < 10){
-    prize = '$ 2000';
+    prize = '$ 1000';
   }  
   if(index >= 10 && index < 15){
-    prize = '$ 15000'
+    prize = '$ 32000'
   }
   
   const element = document.createElement('div');
