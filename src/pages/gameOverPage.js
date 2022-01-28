@@ -1,6 +1,7 @@
 import { initWelcomePage } from './welcomePage.js';
 import { createWrongAnswerPage } from '../views/wrongAnswerView.js';
 import { USER_INTERFACE_ID, RESTART_BUTTON_ID } from '../constants.js';
+import { quizData } from '../data.js';
 
 export const initGameOverPage = () => {
     const wrongAnswerElement = createWrongAnswerPage()
@@ -11,6 +12,7 @@ export const initGameOverPage = () => {
     .addEventListener('click', () => {
         userInterface.innerHTML = ''
         setTimeout(() => {
+            quizData.currentQuestionIndex = 0
             initWelcomePage()
         },300)
         
