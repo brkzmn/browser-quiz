@@ -11,6 +11,7 @@ import { quizData } from '../data.js';
 import { initProcess } from '../views/processView.js';
 import { initGameOverPage } from './gameOverPage.js';
 import { initBreakpointPage } from './breakpointPage.js';
+import { initFinishPage } from './finishPage.js';
 import { getFiftyFiftyElement } from '../views/helpView.js';
 
 export const initQuestionPage = () => {
@@ -111,6 +112,9 @@ const nextQuestion = (e) => {
       ) {
         userInterfaceElement.innerHTML = '';
         initBreakpointPage(quizData.currentQuestionIndex + 1);
+      } else if (quizData.currentQuestionIndex + 1 === 15) {
+        userInterfaceElement.innerHTML = '';
+        initFinishPage(quizData.currentQuestionIndex + 1);
       } else {
         quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
         userInterfaceElement.innerHTML = '';
