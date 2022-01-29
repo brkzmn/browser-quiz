@@ -1,4 +1,4 @@
-import { initWelcomePage } from './welcomePage.js';
+import { loadApp } from '../app.js';
 import { createWrongAnswerPage } from '../views/wrongAnswerView.js';
 import { USER_INTERFACE_ID, RESTART_BUTTON_ID } from '../constants.js';
 import { quizData } from '../data.js';
@@ -13,7 +13,7 @@ export const initGameOverPage = () => {
         userInterface.innerHTML = ''
         setTimeout(() => {
             quizData.currentQuestionIndex = 0
-            initWelcomePage()
+            loadApp()
         },300)
         
     })
