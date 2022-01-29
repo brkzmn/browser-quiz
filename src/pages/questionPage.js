@@ -16,7 +16,7 @@ import { initBreakpointPage } from './breakpointPage.js';
 import { initFinishPage } from './finishPage.js';
 import { getFiftyFiftyElement } from '../views/helpView.js';
 import { initTimer } from '../views/timerView.js';
-let a;
+let timerInterval;
 
 export const initQuestionPage = () => {
   const currentQuestion = getCurrentQuestion();
@@ -54,7 +54,7 @@ export const initQuestionPage = () => {
     input.addEventListener('click', (e) => {
       IsAnswerRight(e);
       nextQuestion(e);
-      clearInterval(a);
+      clearInterval(timerInterval);
       stopTimerAnimation();
       playAudio('select');
     });
@@ -180,7 +180,7 @@ const shuffleAnswers = (question) => {
 };
 
 const getTimer = (time) => {
-  a = setInterval(timer, 1000);
+  timerInterval = setInterval(timer, 1000);
   const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID);
   function timer() {
     timeDiv.textContent = time;
@@ -190,7 +190,7 @@ const getTimer = (time) => {
       timeDiv.textContent = `0${number}`;
     }
     if (time < 0) {
-      clearInterval(a);
+      clearInterval(timerInterval);
       timeDiv.textContent = '00';
       initTimeOutPage();
     }
