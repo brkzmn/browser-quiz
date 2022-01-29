@@ -13,10 +13,12 @@ export const initFinishPage = (index) => {
 
   const backToHomeBtn = document.getElementById(BREAKPOINT_BUTTON_ACCEPT_ID);
 
-  backToHomeBtn.addEventListener('click', () => {
-    const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
+  backToHomeBtn.addEventListener('click', finish);
+};
+
+const finish = () => {
+  const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
     userInterfaceElement.innerHTML = '';
     quizData.currentQuestionIndex = 0;
     loadApp();
-  });
-};
+}

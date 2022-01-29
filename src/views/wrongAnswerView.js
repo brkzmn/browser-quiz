@@ -4,7 +4,6 @@ import { RESTART_BUTTON_ID } from '../constants.js';
 
 export const createWrongAnswerPage = () => {
   const index = quizData.currentQuestionIndex
-  console.log(index)
   let prize;
   if(index < 5){
     prize = '$ 0'
