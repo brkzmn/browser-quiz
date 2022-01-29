@@ -4,10 +4,10 @@ import { USER_INTERFACE_ID, RESTART_BUTTON_ID } from '../constants.js';
 import { quizData } from '../data.js';
 
 export const initTimeOutPage = () => {
-    const timeOutElement = createTimeOutPage()
-    const userInterface = document.getElementById(USER_INTERFACE_ID);
-    userInterface.innerHTML = '';
-    userInterface.appendChild(timeOutElement);
+  const timeOutElement = createTimeOutPage();
+  const userInterface = document.getElementById(USER_INTERFACE_ID);
+  userInterface.innerHTML = '';
+  userInterface.appendChild(timeOutElement);
 
     document.getElementById(RESTART_BUTTON_ID)
     .addEventListener('click', () => {
@@ -16,6 +16,6 @@ export const initTimeOutPage = () => {
             quizData.currentQuestionIndex = 0
             loadApp()
         },300)
-        
     })
 }
+
