@@ -26,7 +26,8 @@ export const initQuestionPage = () => {
 
   const timerElement = initTimer();
   userInterface.appendChild(timerElement);
-  getTimer(10);
+
+  getTimer(30);
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
