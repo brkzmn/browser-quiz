@@ -40,7 +40,6 @@ export const quizData = {
       },
       correct: 'a',
       difficulty: 'easy',
-      
     },
     {
       id: 3,
@@ -65,7 +64,6 @@ export const quizData = {
       },
       correct: 'a',
       difficulty: 'easy',
-      links: [],
     },
     {
       id: 5,
@@ -199,6 +197,5 @@ export const quizData = {
       correct: 'c',
       difficulty: 'hard',
     },
-    
   ],
 };
