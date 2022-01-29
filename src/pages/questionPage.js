@@ -42,7 +42,7 @@ export const initQuestionPage = () => {
     input.addEventListener('click', (e) => {
       IsAnswerRight(e);
       nextQuestion(e);
-      playAudio(2);
+      playAudio('select');
     });
   });
 
@@ -63,8 +63,8 @@ const IsAnswerRight = (e) => {
         .nextElementSibling;
       rightAnswer.style.backgroundColor = 'green';
       e.target.previousElementSibling.id !== currentQuestion.correct
-        ? playAudio(0)
-        : playAudio(1);
+        ? playAudio('wrong')
+        : playAudio('right');
     }, 200);
     if (e.target.previousElementSibling.id !== currentQuestion.correct) {
       e.target.style.backgroundColor = 'red';
@@ -77,19 +77,19 @@ const playAudio = (e) => {
   const wrong = new Audio('../../public/assets/sounds/wrong_answer.mp3');
   const waiting = new Audio('../../public/assets/sounds/waiting_answer.mp3');
 
-  if (e === 2) {
+  if (e === 'select') {
     waiting.play();
     setTimeout(() => {
       waiting.pause();
     }, 2000);
   }
-  if (e === 1) {
+  if (e === 'right') {
     right.play();
     setTimeout(() => {
       right.pause();
     }, 3200);
   }
-  if (e === 0) {
+  if (e === 'wrong') {
     right.pause();
     wrong.play();
   }
