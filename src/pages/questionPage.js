@@ -146,14 +146,14 @@ const nextQuestion = (e) => {
 const fiftyFifty = () => {
   const curQuestion = getCurrentQuestion();
   const allAnswers = ['a', 'b', 'c', 'd'];
-  const wrongAnswers = collect(allAnswers)
+  collect(allAnswers)
     .reject((answer) => answer == curQuestion.correct)
     .shuffle()
     .slice(0, 2)
     .each((answer) => {
-      const nextElement = document
-        .getElementById(answer)
-        .nextElementSibling.classList.add('wrong-answer');
+    document
+      .getElementById(answer)
+      .nextElementSibling.classList.add('wrong-answer');
     });
   const button = document.getElementById(FIFTY_BUTTON_ID);
   button.disabled = true;
