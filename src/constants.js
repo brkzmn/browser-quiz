@@ -14,6 +14,6 @@ export const PROCESS_BAR_ID = 'process-bar-element';
 export const START_BUTTON_ID = 'start-button';
 export const RESTART_BUTTON_ID = 'restart-button';
 export const FIFTY_BUTTON_ID = 'fifty-button';
-
 export const BREAKPOINT_BUTTON_ACCEPT_ID = 'breakpoint-button-accept';
 export const BREAKPOINT_BUTTON_CONTINUE_ID = 'breakpoint-button-continue';
+export const TIMER_INTERFACE_TEXT_ID = 'timer-interface-text';

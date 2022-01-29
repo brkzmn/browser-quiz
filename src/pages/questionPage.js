@@ -1,18 +1,17 @@
 'use strict';
 
-import {
-  ANSWERS_LIST_ID,
-  USER_INTERFACE_ID,
-  FIFTY_BUTTON_ID,
-} from '../constants.js';
+import { ANSWERS_LIST_ID, USER_INTERFACE_ID, FIFTY_BUTTON_ID, TIMER_INTERFACE_TEXT_ID } from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
 import { initProcess } from '../views/processView.js';
 import { initGameOverPage } from './gameOverPage.js';
+import { initTimeOutPage } from './timeOutPage.js';
 import { initBreakpointPage } from './breakpointPage.js';
 import { initFinishPage } from './finishPage.js';
 import { getFiftyFiftyElement } from '../views/helpView.js';
+import { initTimer } from '../views/timerView.js';
+let a;
 
 export const initQuestionPage = () => {
   const currentQuestion = getCurrentQuestion();
@@ -24,6 +23,10 @@ export const initQuestionPage = () => {
     fiftyFiftyElement.firstElementChild.disabled = true;
   }
   userInterface.appendChild(fiftyFiftyElement);
+
+  const timerElement = initTimer();
+  userInterface.appendChild(timerElement);
+  getTimer(99);
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -42,6 +45,8 @@ export const initQuestionPage = () => {
     input.addEventListener('click', (e) => {
       IsAnswerRight(e);
       nextQuestion(e);
+      clearInterval(a);
+      stopTimerAnimation();
       playAudio('select');
     });
   });
@@ -156,7 +161,7 @@ const shuffleAnswers = (question) => {
     c: shuffledValues.items[2],
     d: shuffledValues.items[3],
   };
-
+  
   for (const [key, value] of Object.entries(question.answers)) {
     if (value === correctVal) {
       question.correct = key;
@@ -164,3 +169,30 @@ const shuffleAnswers = (question) => {
   }
   return question;
 };
+
+const getTimer = (time) => {
+
+  a = setInterval(timer, 1000);
+  const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID);
+  function timer() {
+    timeDiv.textContent = time;
+    time--;
+    if(time < 9) {
+      let number = timeDiv.textContent;
+      timeDiv.textContent = `0${number}`; 
+    }
+    if(time < 0 ) {
+      clearInterval(a);
+      timeDiv.textContent = '00';
+      initTimeOutPage();
+    } 
+  }
+}
+
+const stopTimerAnimation = () => {
+  const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID) 
+  timeDiv.style.animation = 'none';
+}
+
+  
+
