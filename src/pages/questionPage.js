@@ -1,6 +1,11 @@
 'use strict';
 
-import { ANSWERS_LIST_ID, USER_INTERFACE_ID, FIFTY_BUTTON_ID, TIMER_INTERFACE_TEXT_ID } from '../constants.js';
+import {
+  ANSWERS_LIST_ID,
+  USER_INTERFACE_ID,
+  FIFTY_BUTTON_ID,
+  TIMER_INTERFACE_TEXT_ID,
+} from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { quizData } from '../data.js';
@@ -22,11 +27,15 @@ export const initQuestionPage = () => {
   if (localStorage.getItem('fiftyFiftyIsUsed') === 'true') {
     fiftyFiftyElement.firstElementChild.disabled = true;
   }
-  userInterface.appendChild(fiftyFiftyElement);
+
+  const timerAndHelperView = document.createElement('div');
+  timerAndHelperView.classList.add('timer-helper-container');
+  userInterface.appendChild(timerAndHelperView);
+  timerAndHelperView.appendChild(fiftyFiftyElement);
 
   const timerElement = initTimer();
-  userInterface.appendChild(timerElement);
-  getTimer(99);
+  timerAndHelperView.appendChild(timerElement);
+  getTimer(30);
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -161,7 +170,7 @@ const shuffleAnswers = (question) => {
     c: shuffledValues.items[2],
     d: shuffledValues.items[3],
   };
-  
+
   for (const [key, value] of Object.entries(question.answers)) {
     if (value === correctVal) {
       question.correct = key;
@@ -171,28 +180,24 @@ const shuffleAnswers = (question) => {
 };
 
 const getTimer = (time) => {
-
   a = setInterval(timer, 1000);
   const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID);
   function timer() {
     timeDiv.textContent = time;
     time--;
-    if(time < 9) {
+    if (time < 9) {
       let number = timeDiv.textContent;
-      timeDiv.textContent = `0${number}`; 
+      timeDiv.textContent = `0${number}`;
     }
-    if(time < 0 ) {
+    if (time < 0) {
       clearInterval(a);
       timeDiv.textContent = '00';
       initTimeOutPage();
-    } 
+    }
   }
-}
+};
 
 const stopTimerAnimation = () => {
-  const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID) 
+  const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID);
   timeDiv.style.animation = 'none';
-}
-
-  
-
+};
