@@ -53,9 +53,9 @@ export const initQuestionPage = () => {
 
   const inputs = document.getElementsByTagName('label');
   Array.from(inputs).forEach((input) => {
-    input.addEventListener('click', (e) => {
-      IsAnswerRight(e);
-      nextQuestion(e);
+    input.addEventListener('click', (answer) => {
+      IsAnswerRight(answer);
+      nextQuestion(answer);
       clearInterval(timerInterval);
       stopTimerAnimation();
       playAudio('select');
@@ -66,7 +66,7 @@ export const initQuestionPage = () => {
   buttonElement.addEventListener('click', fiftyFifty);
 };
 
-const IsAnswerRight = (e) => {
+const IsAnswerRight = (answer) => {
   const answerList = document.querySelectorAll('.answer-list-item');
   Array.from(answerList).forEach((answer) => {
     answer.classList.add('pointer-none');
@@ -78,34 +78,34 @@ const IsAnswerRight = (e) => {
       const rightAnswer = document.getElementById(currentQuestion.correct)
         .nextElementSibling;
       rightAnswer.style.backgroundColor = 'green';
-      e.target.previousElementSibling.id !== currentQuestion.correct
+      answer.target.previousElementSibling.id !== currentQuestion.correct
         ? playAudio('wrong')
         : playAudio('right');
     }, 200);
-    if (e.target.previousElementSibling.id !== currentQuestion.correct) {
-      e.target.style.backgroundColor = 'red';
+    if (answer.target.previousElementSibling.id !== currentQuestion.correct) {
+      answer.target.style.backgroundColor = 'red';
     }
   }, RIGHT_SOUND_DURATION);
 };
 
-const playAudio = (e) => {
+const playAudio = (sound) => {
   const right = new Audio('../../public/assets/sounds/correct_answer.mp3');
   const wrong = new Audio('../../public/assets/sounds/wrong_answer.mp3');
   const waiting = new Audio('../../public/assets/sounds/waiting_answer.mp3');
 
-  if (e === 'select') {
+  if (sound === 'select') {
     waiting.play();
     setTimeout(() => {
       waiting.pause();
     }, WAITING_SOUND_DURATION);
   }
-  if (e === 'right') {
+  if (sound === 'right') {
     right.play();
     setTimeout(() => {
       right.pause();
     }, RIGHT_SOUND_DURATION);
   }
-  if (e === 'wrong') {
+  if (sound === 'wrong') {
     right.pause();
     wrong.play();
   }
@@ -117,10 +117,10 @@ export const getCurrentQuestion = () => {
   return quizData.questions.filter((item) => item.id === newIndex)[0];
 };
 
-const nextQuestion = (e) => {
+const nextQuestion = (answer) => {
   const currentQuestion = getCurrentQuestion();
   const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
-  if (e.target.previousElementSibling.id === currentQuestion.correct) {
+  if (answer.target.previousElementSibling.id === currentQuestion.correct) {
     setTimeout(() => {
       if (
         quizData.currentQuestionIndex + 1 === 5 ||
