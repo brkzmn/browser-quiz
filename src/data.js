@@ -40,7 +40,6 @@ export const quizData = {
       },
       correct: 'a',
       difficulty: 'easy',
-      
     },
     {
       id: 3,
@@ -65,7 +64,6 @@ export const quizData = {
       },
       correct: 'a',
       difficulty: 'easy',
-      links: [],
     },
     {
       id: 5,
@@ -93,14 +91,14 @@ export const quizData = {
     },
     {
       id: 7,
-      text: 'How does Java Script store dates in objects of Date type?',
+      text: 'How do you round the number 3.14, to the nearest integer?',
       answers: {
-        a: 'The number of days since January 1st, 1900',
-        b: 'The number of seconds since January 1st, 1970',
-        c: 'The number of milliseconds since January 1st, 1970',
-        d: 'The number of picoseconds since January 1st, 1970',
+        a: 'Round(3.14)',
+        b: 'Math.round(3.14)',
+        c: 'rnd(3.14)',
+        d: 'Math.rnd(3.14)',
       },
-      correct: 'c',
+      correct: 'b',
       difficulty: 'medium',
     },
     {
@@ -117,14 +115,14 @@ export const quizData = {
     },
     {
       id: 9,
-      text: 'Which of the following code creates an object?',
+      text: 'How can you add a comment in a JavaScript?',
       answers: {
-        a: 'var book = createObject();',
-        b: 'var book = new Object();',
-        c: 'var book = createBook();',
-        d: 'var book = new OBJECT();',
+        a: '//This a comment',
+        b: '*This is comment',
+        c: '--This is comment',
+        d: '!!This is comment',
       },
-      correct: 'b',
+      correct: 'a',
       difficulty: 'medium',
     },
     {
@@ -156,7 +154,7 @@ export const quizData = {
       text: ' How to append a value to an array in JavaScript?',
       answers: {
         a: 'arr[arr.length] = value',
-        b: 'arr[arr.length+1] = new Arrays()',
+        b: 'arr[arr.length+1] = value',
         c: 'arr[arr.length-1] = value',
         d: 'arr[arr.length*1] = value',
       },
@@ -168,7 +166,7 @@ export const quizData = {
       text: 'Which machine actually executes the JavaScript?',
       answers: {
         a: 'The web server',
-        b: 'The machine which is running a web browser',
+        b: 'Web browser',
         c: 'Java Script engine',
         d: 'Microsoft',
       },
@@ -199,6 +197,5 @@ export const quizData = {
       correct: 'c',
       difficulty: 'hard',
     },
-    
   ],
 };
