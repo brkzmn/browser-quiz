@@ -25,7 +25,7 @@ export const initQuestionPage = () => {
 
   const timerElement = initTimer();
   userInterface.appendChild(timerElement);
-  getTimer(30);
+  getTimer(99);
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -46,6 +46,7 @@ export const initQuestionPage = () => {
       nextQuestion(e);
       playAudio(2);
       clearInterval(a);
+      stopTimerAnimation();
     });
   });
 
@@ -158,4 +159,9 @@ const getTimer = (time) => {
 
     } 
   }
+}
+
+const stopTimerAnimation = () => {
+  const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID) 
+  timeDiv.style.animation = 'none';
 }
