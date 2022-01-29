@@ -37,7 +37,7 @@ export const initQuestionPage = () => {
 
   const timerElement = initTimer();
   timerAndHelperView.appendChild(timerElement);
-  getTimer(30);
+  startTimer(30);
 
   const questionElement = getQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
@@ -181,7 +181,7 @@ const shuffleAnswers = (question) => {
   return question;
 };
 
-const getTimer = (time) => {
+const startTimer = (time) => {
   timerInterval = setInterval(timer, 1000);
   const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID);
   function timer() {
