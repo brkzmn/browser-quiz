@@ -41,11 +41,17 @@ body {
 }
 
 /*-----welcome page----*/
-.welcome-container {
+.welcome-container,
+.wrong-answer-container,
+.finish-page-container,
+.breakpoint-page-container {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.welcome-title {
+.welcome-title,
+.finish-title {
   font-size: 2.5rem;
   margin-bottom: var(--space-md);
 }
@@ -54,7 +60,7 @@ body {
   font-family: inherit;
   font-size: 1.1rem;
   padding: 0.5rem;
-  width: 8rem;
+  width: 10rem;
   margin-top: var(--space-md);
   margin-bottom: var(--space-md);
   border-radius: 0.5rem;
@@ -69,6 +75,51 @@ body {
   background-color: var(--clr-white);
   border: none;
   transition: all 0.1s linear;
+}
+
+#fifty-button {
+  font-size: 1.4rem;
+  background: rgb(100, 103, 131);
+  background: linear-gradient(
+    0deg,
+    rgba(100, 103, 131, 0.9976365546218487) 0%,
+    rgba(52, 53, 65, 1) 0%,
+    rgba(3, 10, 83, 1) 0%,
+    rgba(136, 142, 226, 1) 0%,
+    rgba(119, 124, 192, 1) 0%,
+    rgba(69, 71, 91, 1) 0%,
+    rgba(129, 196, 213, 1) 0%,
+    rgba(141, 136, 226, 1) 0%,
+    rgba(70, 125, 143, 1) 0%,
+    rgba(16, 36, 98, 1) 51%,
+    rgba(0, 0, 0, 1) 51%,
+    rgba(18, 19, 82, 0.9374124649859944) 51%,
+    rgba(70, 125, 143, 1) 100%
+  );
+  /* gradient for 50:50 button*/
+  color: var(--clr-orange-dark);
+  border: 1px solid var(--clr-aqua);
+  border-radius: 4rem;
+  padding: var(--space-sm);
+  cursor: pointer;
+}
+
+#fifty-button:hover {
+  color: var(--clr-orange);
+  transition: 0.1s ease-in;
+  transform: scale(1.02);
+  box-shadow: 0 8px 8px rgba(95, 141, 160, 0.2);
+}
+
+#fifty-button:disabled {
+  opacity: 0.4;
+  cursor: unset;
+}
+
+.breakpoint-btn-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
 /*----question pages----*/
@@ -162,17 +213,11 @@ ul {
   pointer-events: none;
 }
 
-.wrong-answer{
-  color: rgba(0,0,0,0) !important;
+.wrong-answer {
+  color: rgba(0, 0, 0, 0) !important;
 }
 
-.wrong-answer-container{
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.wrong-answer-text{
+.wrong-answer-text {
   font-size: 1.5rem;
   color: var(--clr-orange-dark);
 }
@@ -297,14 +342,19 @@ ul {
   .logo {
     width: 18rem;
   }
+  #fifty-button {
+    font-size: 0.9rem;
+  }
   #answers-list {
     grid-template-columns: 1fr;
   }
   #process-bar-element {
-    margin-left: var(--space-md);
+    margin-left: var(--space-sm);
     flex: 1;
+    font-size: 0.5rem;
   }
   .question-wrapper {
+    justify-content: flex-start;
     flex: 1;
   }
 }

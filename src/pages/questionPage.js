@@ -8,17 +8,18 @@ import { initProcess } from '../views/processView.js';
 import { initGameOverPage } from './gameOverPage.js';
 import { initTimeOutPage } from './timeOutPage.js';
 import { initBreakpointPage } from './breakpointPage.js';
+import { initFinishPage } from './finishPage.js';
 import { getFiftyFiftyElement } from '../views/helpView.js';
 import { initTimer } from '../views/timerView.js';
 let a;
 
-
 export const initQuestionPage = () => {
   const currentQuestion = getCurrentQuestion();
+  shuffleAnswers(currentQuestion);
   const userInterface = document.getElementById(USER_INTERFACE_ID);
 
   const fiftyFiftyElement = getFiftyFiftyElement();
-  if (localStorage.getItem('fiftyFiftyIsUsed') === 'true' ){
+  if (localStorage.getItem('fiftyFiftyIsUsed') === 'true') {
     fiftyFiftyElement.firstElementChild.disabled = true;
   }
   userInterface.appendChild(fiftyFiftyElement);
@@ -44,14 +45,14 @@ export const initQuestionPage = () => {
     input.addEventListener('click', (e) => {
       IsAnswerRight(e);
       nextQuestion(e);
-      playAudio(2);
       clearInterval(a);
       stopTimerAnimation();
+      playAudio('select');
     });
   });
 
   const buttonElement = document.getElementById(FIFTY_BUTTON_ID);
-  buttonElement.addEventListener('click',fiftyFifty)
+  buttonElement.addEventListener('click', fiftyFifty);
 };
 
 const IsAnswerRight = (e) => {
@@ -61,56 +62,65 @@ const IsAnswerRight = (e) => {
   });
 
   setTimeout(() => {
-    const currentQuestion = getCurrentQuestion(); 
+    const currentQuestion = getCurrentQuestion();
     setTimeout(() => {
-      const rightAnswer = document.getElementById(currentQuestion.correct).nextElementSibling
+      const rightAnswer = document.getElementById(currentQuestion.correct)
+        .nextElementSibling;
       rightAnswer.style.backgroundColor = 'green';
-      (e.target.previousElementSibling.id !== currentQuestion.correct) ? playAudio(0) : playAudio(1);
-    }, 200)
-    if(e.target.previousElementSibling.id !== currentQuestion.correct){
+      e.target.previousElementSibling.id !== currentQuestion.correct
+        ? playAudio('wrong')
+        : playAudio('right');
+    }, 200);
+    if (e.target.previousElementSibling.id !== currentQuestion.correct) {
       e.target.style.backgroundColor = 'red';
     }
   }, 2000);
-}
+};
 
 const playAudio = (e) => {
   const right = new Audio('../../public/assets/sounds/correct_answer.mp3');
   const wrong = new Audio('../../public/assets/sounds/wrong_answer.mp3');
   const waiting = new Audio('../../public/assets/sounds/waiting_answer.mp3');
 
-  if (e === 2) {
+  if (e === 'select') {
     waiting.play();
     setTimeout(() => {
-      waiting.pause()
-    },2000)
+      waiting.pause();
+    }, 2000);
   }
-  if (e === 1){
+  if (e === 'right') {
     right.play();
-    setTimeout(() =>{
-      right.pause()
-    },3200)
+    setTimeout(() => {
+      right.pause();
+    }, 3200);
   }
-  if (e === 0){
+  if (e === 'wrong') {
     right.pause();
     wrong.play();
   }
-}
+};
 
 export const getCurrentQuestion = () => {
   const order = localStorage.getItem('ids').split(',');
   const newIndex = parseInt(order[quizData.currentQuestionIndex]);
   return quizData.questions.filter((item) => item.id === newIndex)[0];
-}
+};
 
 const nextQuestion = (e) => {
   const currentQuestion = getCurrentQuestion();
   const userInterfaceElement = document.getElementById(USER_INTERFACE_ID);
-  if(e.target.previousElementSibling.id === currentQuestion.correct){
+  if (e.target.previousElementSibling.id === currentQuestion.correct) {
     setTimeout(() => {
-      if(quizData.currentQuestionIndex + 1 === 5 || quizData.currentQuestionIndex + 1 === 10) {
+      if (
+        quizData.currentQuestionIndex + 1 === 5 ||
+        quizData.currentQuestionIndex + 1 === 10
+      ) {
         userInterfaceElement.innerHTML = '';
         initBreakpointPage(quizData.currentQuestionIndex + 1);
-      } else  {
+      } else if (quizData.currentQuestionIndex + 1 === 15) {
+        userInterfaceElement.innerHTML = '';
+        initFinishPage(quizData.currentQuestionIndex + 1);
+      } else {
         quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
         userInterfaceElement.innerHTML = '';
         initQuestionPage();
@@ -119,26 +129,45 @@ const nextQuestion = (e) => {
   } else {
     setTimeout(() => {
       userInterfaceElement.innerHTML = '';
-      initGameOverPage()
+      initGameOverPage();
     }, 5000);
   }
-
 };
 
 const fiftyFifty = () => {
   const curQuestion = getCurrentQuestion();
-  const allAnswers = ['a','b','c','d'];
+  const allAnswers = ['a', 'b', 'c', 'd'];
   const wrongAnswers = collect(allAnswers)
-    .reject(answer => answer == curQuestion.correct)
+    .reject((answer) => answer == curQuestion.correct)
     .shuffle()
-    .slice(0,2)
+    .slice(0, 2)
     .each((answer) => {
-      const nextElement = document.getElementById(answer).nextElementSibling.classList.add('wrong-answer');
-    })
-  const button = document.getElementById(FIFTY_BUTTON_ID)
+      const nextElement = document
+        .getElementById(answer)
+        .nextElementSibling.classList.add('wrong-answer');
+    });
+  const button = document.getElementById(FIFTY_BUTTON_ID);
   button.disabled = true;
   localStorage.setItem('fiftyFiftyIsUsed', 'true');
+};
 
+const shuffleAnswers = (question) => {
+  const correctVal = question.answers[question.correct];
+  const shuffledValues = collect(Object.values(question.answers)).shuffle();
+
+  question.answers = {
+    a: shuffledValues.items[0],
+    b: shuffledValues.items[1],
+    c: shuffledValues.items[2],
+    d: shuffledValues.items[3],
+  };
+  
+  for (const [key, value] of Object.entries(question.answers)) {
+    if (value === correctVal) {
+      question.correct = key;
+    }
+  }
+  return question;
 };
 
 const getTimer = (time) => {
@@ -156,7 +185,6 @@ const getTimer = (time) => {
       clearInterval(a);
       timeDiv.textContent = '00';
       initTimeOutPage();
-
     } 
   }
 }
@@ -165,3 +193,6 @@ const stopTimerAnimation = () => {
   const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID) 
   timeDiv.style.animation = 'none';
 }
+
+  
+
