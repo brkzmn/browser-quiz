@@ -1,5 +1,5 @@
 'use strict';
-import { quizData } from '../data.js';
+import { quizData, prizes } from '../data.js';
 import { RESTART_BUTTON_ID } from '../constants.js';
 
 export const createWrongAnswerPage = () => {
@@ -10,10 +10,10 @@ export const createWrongAnswerPage = () => {
     prize = '$ 0'
   }
   if(index >= 5 && index < 10){
-    prize = '$ 1000';
+    prize = `$ ${prizes[4]}`;
   }  
   if(index >= 10 && index < 15){
-    prize = '$ 32000'
+    prize = `$ ${prizes[9]}`
   }
   
   const element = document.createElement('div');
