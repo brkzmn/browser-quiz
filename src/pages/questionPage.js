@@ -195,7 +195,6 @@ const startTimer = (time) => {
       initTimeOutPage();
     }
   }
-  return timeDiv
 };
 
 const stopTimerAnimation = () => {
