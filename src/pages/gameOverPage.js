@@ -3,21 +3,21 @@ import { createWrongAnswerPage } from '../views/wrongAnswerView.js';
 import { USER_INTERFACE_ID, RESTART_BUTTON_ID, RESTART_DURATION } from '../constants.js';
 import { quizData } from '../data.js';
 
+const userInterface = document.getElementById(USER_INTERFACE_ID);
+
 export const initGameOverPage = () => {
     const wrongAnswerElement = createWrongAnswerPage()
-    const userInterface = document.getElementById(USER_INTERFACE_ID);
     userInterface.appendChild(wrongAnswerElement);
 
     document.getElementById(RESTART_BUTTON_ID)
-    .addEventListener('click', () => {
-        userInterface.innerHTML = ''
-        setTimeout(() => {
-            quizData.currentQuestionIndex = 0
-            loadApp()
-        },RESTART_DURATION)
-        
-    })
+    .addEventListener('click',gameOver)
 }
 
-
+const gameOver = () => {
+    userInterface.innerHTML = ''
+    setTimeout(() => {
+        quizData.currentQuestionIndex = 0
+        loadApp()
+    },RESTART_DURATION)
+}
 
