@@ -1,6 +1,6 @@
 import { loadApp } from '../app.js';
 import { createWrongAnswerPage } from '../views/wrongAnswerView.js';
-import { USER_INTERFACE_ID, RESTART_BUTTON_ID } from '../constants.js';
+import { USER_INTERFACE_ID, RESTART_BUTTON_ID, RESTART_DURATION } from '../constants.js';
 import { quizData } from '../data.js';
 
 const userInterface = document.getElementById(USER_INTERFACE_ID);
@@ -18,8 +18,6 @@ const gameOver = () => {
     setTimeout(() => {
         quizData.currentQuestionIndex = 0
         loadApp()
-    },300)
+    },RESTART_DURATION)
 }
-
-
 

@@ -17,3 +17,6 @@ export const FIFTY_BUTTON_ID = 'fifty-button';
 export const BREAKPOINT_BUTTON_ACCEPT_ID = 'breakpoint-button-accept';
 export const BREAKPOINT_BUTTON_CONTINUE_ID = 'breakpoint-button-continue';
 export const TIMER_INTERFACE_TEXT_ID = 'timer-interface-text';
+export const RIGHT_SOUND_DURATION = 2000;
+export const WAITING_SOUND_DURATION = 3200;
+export const RESTART_DURATION = 300;
