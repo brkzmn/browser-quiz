@@ -106,7 +106,6 @@ const playAudio = (sound) => {
     }, RIGHT_SOUND_DURATION);
   }
   if (sound === 'wrong') {
-    right.pause();
     wrong.play();
   }
 };
