@@ -5,6 +5,8 @@ import {
   USER_INTERFACE_ID,
   FIFTY_BUTTON_ID,
   TIMER_INTERFACE_TEXT_ID,
+  RIGHT_SOUND_DURATION,
+  WAITING_SOUND_DURATION
 } from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
@@ -16,7 +18,7 @@ import { initBreakpointPage } from './breakpointPage.js';
 import { initFinishPage } from './finishPage.js';
 import { getFiftyFiftyElement } from '../views/helpView.js';
 import { initTimer } from '../views/timerView.js';
-let a;
+let timerInterval;
 
 export const initQuestionPage = () => {
   const currentQuestion = getCurrentQuestion();
@@ -54,7 +56,7 @@ export const initQuestionPage = () => {
     input.addEventListener('click', (e) => {
       IsAnswerRight(e);
       nextQuestion(e);
-      clearInterval(a);
+      clearInterval(timerInterval);
       stopTimerAnimation();
       playAudio('select');
     });
@@ -83,7 +85,7 @@ const IsAnswerRight = (e) => {
     if (e.target.previousElementSibling.id !== currentQuestion.correct) {
       e.target.style.backgroundColor = 'red';
     }
-  }, 2000);
+  }, RIGHT_SOUND_DURATION);
 };
 
 const playAudio = (e) => {
@@ -95,13 +97,13 @@ const playAudio = (e) => {
     waiting.play();
     setTimeout(() => {
       waiting.pause();
-    }, 2000);
+    }, WAITING_SOUND_DURATION);
   }
   if (e === 'right') {
     right.play();
     setTimeout(() => {
       right.pause();
-    }, 3200);
+    }, RIGHT_SOUND_DURATION);
   }
   if (e === 'wrong') {
     right.pause();
@@ -134,26 +136,26 @@ const nextQuestion = (e) => {
         userInterfaceElement.innerHTML = '';
         initQuestionPage();
       }
-    }, 5000);
+    }, (WAITING_SOUND_DURATION + RIGHT_SOUND_DURATION));
   } else {
     setTimeout(() => {
       userInterfaceElement.innerHTML = '';
       initGameOverPage();
-    }, 5000);
+    }, (WAITING_SOUND_DURATION + RIGHT_SOUND_DURATION));
   }
 };
 
 const fiftyFifty = () => {
   const curQuestion = getCurrentQuestion();
   const allAnswers = ['a', 'b', 'c', 'd'];
-  const wrongAnswers = collect(allAnswers)
+  collect(allAnswers)
     .reject((answer) => answer == curQuestion.correct)
     .shuffle()
     .slice(0, 2)
     .each((answer) => {
-      const nextElement = document
-        .getElementById(answer)
-        .nextElementSibling.classList.add('wrong-answer');
+    document
+      .getElementById(answer)
+      .nextElementSibling.classList.add('wrong-answer');
     });
   const button = document.getElementById(FIFTY_BUTTON_ID);
   button.disabled = true;
@@ -180,7 +182,7 @@ const shuffleAnswers = (question) => {
 };
 
 const startTimer = (time) => {
-  a = setInterval(timer, 1000);
+  timerInterval = setInterval(timer, 1000);
   const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID);
   function timer() {
     timeDiv.textContent = time;
@@ -190,7 +192,7 @@ const startTimer = (time) => {
       timeDiv.textContent = `0${number}`;
     }
     if (time < 0) {
-      clearInterval(a);
+      clearInterval(timerInterval);
       timeDiv.textContent = '00';
       initTimeOutPage();
     }
