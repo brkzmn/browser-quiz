@@ -5,6 +5,8 @@ import {
   USER_INTERFACE_ID,
   FIFTY_BUTTON_ID,
   TIMER_INTERFACE_TEXT_ID,
+  RIGHT_SOUND_DURATION,
+  WAITING_SOUND_DURATION
 } from '../constants.js';
 import { getQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
@@ -83,7 +85,7 @@ const IsAnswerRight = (e) => {
     if (e.target.previousElementSibling.id !== currentQuestion.correct) {
       e.target.style.backgroundColor = 'red';
     }
-  }, 2000);
+  }, RIGHT_SOUND_DURATION);
 };
 
 const playAudio = (e) => {
@@ -95,13 +97,13 @@ const playAudio = (e) => {
     waiting.play();
     setTimeout(() => {
       waiting.pause();
-    }, 2000);
+    }, WAITING_SOUND_DURATION);
   }
   if (e === 'right') {
     right.play();
     setTimeout(() => {
       right.pause();
-    }, 3200);
+    }, RIGHT_SOUND_DURATION);
   }
   if (e === 'wrong') {
     right.pause();
@@ -134,12 +136,12 @@ const nextQuestion = (e) => {
         userInterfaceElement.innerHTML = '';
         initQuestionPage();
       }
-    }, 5000);
+    }, (WAITING_SOUND_DURATION + RIGHT_SOUND_DURATION));
   } else {
     setTimeout(() => {
       userInterfaceElement.innerHTML = '';
       initGameOverPage();
-    }, 5000);
+    }, (WAITING_SOUND_DURATION + RIGHT_SOUND_DURATION));
   }
 };
 
