@@ -19,7 +19,7 @@ export const createWrongAnswerPage = () => {
   element.classList.add('wrong-answer-container')
   // I use String.raw just to get fancy colors for the HTML in VS Code.
   element.innerHTML = String.raw`
-    <img class="logo" src="../public/assets/logo_millionaire.webp" alt="game logo">
+    <img class="logo" src="./public/assets/logo_millionaire.webp" alt="game logo">
     <h1 class='welcome-title' >OPPPS! WRONG ANSWER</h1>
     <p class="wrong-answer-text">You won ${prize}</p>
     <button id="${RESTART_BUTTON_ID}" class="btn">RESTART</button>

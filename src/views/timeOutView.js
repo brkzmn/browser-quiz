@@ -17,7 +17,7 @@ export const createTimeOutPage = () => {
   const element = document.createElement('div');
   element.classList.add('wrong-answer-container')
   element.innerHTML = String.raw`
-    <img class="logo" src="../public/assets/logo_millionaire.webp" alt="game logo">
+    <img class="logo" src="./public/assets/logo_millionaire.webp" alt="game logo">
     <h1 class='welcome-title' >OPPPS! TIME OUT</h1>
     <p class="wrong-answer-text">You won ${prize}</p>
     <button id="${RESTART_BUTTON_ID}" class="btn">RESTART</button>
