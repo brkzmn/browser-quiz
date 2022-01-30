@@ -11,7 +11,7 @@ export const getQuestionElement = (question) => {
   element.classList.add('question-wrapper');
   // I use String.raw just to get fancy colors for the HTML in VS Code.
   element.innerHTML = String.raw`
-  <img class="logo" src="../public/assets/logo_millionaire.webp" alt="game logo">
+  <img class="logo" src="./public/assets/logo_millionaire.webp" alt="game logo">
     <h3 class="question-title">${question}</h3>
 
     <ul id="${ANSWERS_LIST_ID}"></ul>
