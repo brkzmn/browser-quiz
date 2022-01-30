@@ -93,9 +93,9 @@ const IsAnswerRight = (answer) => {
 };
 
 const playAudio = (sound) => {
-  const right = new Audio('../../public/assets/sounds/correct_answer.mp3');
-  const wrong = new Audio('../../public/assets/sounds/wrong_answer.mp3');
-  const waiting = new Audio('../../public/assets/sounds/waiting_answer.mp3');
+  const right = new Audio('./public/assets/sounds/correct_answer.mp3');
+  const wrong = new Audio('./public/assets/sounds/wrong_answer.mp3');
+  const waiting = new Audio('./public/assets/sounds/waiting_answer.mp3');
 
   if (sound === 'select') {
     waiting.play();
