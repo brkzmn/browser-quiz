@@ -55,11 +55,10 @@ export const initQuestionPage = () => {
   const inputs = document.getElementsByTagName('label');
   Array.from(inputs).forEach((input) => {
     input.addEventListener('click', (answer) => {
+      disableAnswersButton()
       IsAnswerRight(answer);
-      disableAnswers()
       nextQuestion(answer);
       clearInterval(timerInterval);
-      stopTimerAnimation();
       playAudio('select');
     });
   });
@@ -68,12 +67,12 @@ export const initQuestionPage = () => {
   buttonElement.addEventListener('click', fiftyFifty);
 };
 
- const disableAnswers = () => {
+const disableAnswersButton = () => {
   const answerList = document.querySelectorAll('.answer-list-item');
   Array.from(answerList).forEach((answer) => {
     answer.classList.add('pointer-none');
-  });
- }
+  })
+}
 
 const IsAnswerRight = (answer) => {
 
