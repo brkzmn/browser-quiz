@@ -18,6 +18,7 @@ import { initBreakpointPage } from './breakpointPage.js';
 import { initFinishPage } from './finishPage.js';
 import { getFiftyFiftyElement } from '../views/helpView.js';
 import { initTimer } from '../views/timerView.js';
+
 let timerInterval;
 
 export const initQuestionPage = () => {
@@ -55,6 +56,7 @@ export const initQuestionPage = () => {
   Array.from(inputs).forEach((input) => {
     input.addEventListener('click', (answer) => {
       IsAnswerRight(answer);
+      disableAnswers()
       nextQuestion(answer);
       clearInterval(timerInterval);
       stopTimerAnimation();
@@ -66,11 +68,14 @@ export const initQuestionPage = () => {
   buttonElement.addEventListener('click', fiftyFifty);
 };
 
-const IsAnswerRight = (answer) => {
+ const disableAnswers = () => {
   const answerList = document.querySelectorAll('.answer-list-item');
   Array.from(answerList).forEach((answer) => {
     answer.classList.add('pointer-none');
   });
+ }
+
+const IsAnswerRight = (answer) => {
 
   setTimeout(() => {
     const currentQuestion = getCurrentQuestion();
@@ -198,7 +203,4 @@ const startTimer = (time) => {
   }
 };
 
-const stopTimerAnimation = () => {
-  const timeDiv = document.getElementById(TIMER_INTERFACE_TEXT_ID);
-  timeDiv.style.animation = 'none';
-};
+
